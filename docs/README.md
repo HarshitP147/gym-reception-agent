@@ -8,6 +8,7 @@ Entry point for the `docs/` knowledge base. `AGENTS.md` (repo root) is the ~map;
 |---|---|---|
 | Site architecture & data flow | [architecture/overview.md](architecture/overview.md) | Understanding how pages + data layer fit together |
 | Supabase client & `/api/gym-data` | [architecture/data-layer.md](architecture/data-layer.md) | Touching the client, the API route, or how the agent reads data |
+| FitAgent chat (`/api/chat` + widget) | [architecture/chat-agent.md](architecture/chat-agent.md) | Touching the chat route, tools, DeepSeek, or the chat widget |
 | DB tables, columns, FKs, RLS | [database/schema.md](database/schema.md) | Querying or changing the schema |
 | Migration conventions | [database/migrations.md](database/migrations.md) | Writing or running SQL migrations |
 | File/code conventions | [conventions/file-conventions.md](conventions/file-conventions.md) | Writing any code in `src/` |
