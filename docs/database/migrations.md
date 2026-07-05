@@ -12,7 +12,16 @@ Location: `supabase/migrations/`, numbered `NNNN_description.sql`.
 
 ## Running
 
-Paste the file into the Supabase dashboard → SQL editor → Run. There is no Supabase CLI wired into this repo; if you add one, document it here.
+Supabase CLI is linked to the `gym-agent` project (ref `nitrtksdydxjmtfavqai`). For a new migration file:
+
+```
+supabase db push --dry-run --linked   # preview what would run
+supabase db push --linked             # apply it
+```
+
+`supabase migration list` shows local vs. remote status. Pasting into the dashboard SQL editor still works too, but then the CLI's remote history won't know about it — run `supabase migration repair <version> --status applied --linked` after, or `db push` will try to replay it.
+
+**0001/0002/0003 were originally applied by hand** (before the CLI was linked), then retroactively marked `applied` via `migration repair` so `db push` wouldn't replay 0001's `drop table cascade` against live data. Keep that in mind if the remote history and local files ever look out of sync — check `migration list` before pushing, don't assume.
 
 ## Verifying
 

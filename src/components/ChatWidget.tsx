@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -46,11 +47,29 @@ export default function ChatWidget() {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
 
   const sessionId = useRef<string>("");
   const threadRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Signed-in members use the dashboard, not the anonymous marketing chat.
+  useEffect(() => {
+    const supabase = createClient();
+
+    supabase.auth.getUser().then(({ data }) => {
+      setSignedIn(!!data.user);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSignedIn(!!session?.user);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   function openChat() {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -151,6 +170,8 @@ export default function ChatWidget() {
     messages.length > 0 &&
     messages[messages.length - 1].role === "assistant" &&
     messages[messages.length - 1].content === "";
+
+  if (signedIn) return null;
 
   return (
     <>

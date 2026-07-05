@@ -1,12 +1,31 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
   --background: #0a0a0a;
   --foreground: #f0ede6;
-  --accent: #c8f135;
   --surface: #141414;
   --border: rgba(240, 237, 230, 0.08);
   --muted: rgba(240, 237, 230, 0.6);
+  --muted-foreground: rgba(240, 237, 230, 0.6);
+  --accent: #c8f135;
+  --accent-foreground: #0a0a0a;
+  --primary: #c8f135;
+  --primary-foreground: #0a0a0a;
+  --secondary: #141414;
+  --secondary-foreground: #f0ede6;
+  --card: #141414;
+  --card-foreground: #f0ede6;
+  --popover: #141414;
+  --popover-foreground: #f0ede6;
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
+  --input: rgba(240, 237, 230, 0.08);
+  --ring: #c8f135;
+  --radius: 0.625rem;
 }
 
 @theme inline {
@@ -18,10 +37,27 @@
   --color-muted: var(--muted);
   --font-sans: var(--font-outfit);
   --font-serif: var(--font-dm-serif);
-}
-
-* {
-  border-color: var(--border);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 html {
@@ -40,4 +76,10 @@ h2,
 h3 {
   font-family: var(--font-dm-serif), Georgia, serif;
   font-weight: 400;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
 }

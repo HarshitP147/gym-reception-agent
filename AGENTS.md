@@ -18,10 +18,14 @@ Next.js **16.2.7** (App Router, Turbopack) · React 19 · TypeScript 5 (strict) 
 ## Where things are
 ```
 src/app/            # routes — page.tsx (static home), api/gym-data + api/chat (dynamic)
+                    # login/, signup/, dashboard/ (auth), api/auth/callback
 src/components/      # presentational sections + ChatWidget.tsx (FitAgent bubble)
-src/lib/supabase.ts  # shared Supabase client
+src/components/ui/   # shadcn/ui primitives (Base UI + remixicon), vendored — edit freely
+src/lib/supabase.ts  # anon client — /api/gym-data + /api/chat only
+src/lib/supabase/    # browser/server clients for auth (@supabase/ssr)
 src/lib/gym-data.ts  # getGymData() — shared by /api/gym-data and /api/chat
 src/lib/chat-tools.ts# FitAgent tool schemas + executeTool()
+src/proxy.ts         # Next 16 proxy (was middleware.ts) — auth session refresh + route gate
 supabase/migrations/ # SQL (schema + seed + RLS), idempotent
 docs/                # knowledge base — start at docs/README.md
 public/images/       # assets (only 4 coach portraits exist)
@@ -34,6 +38,7 @@ public/images/       # assets (only 4 coach portraits exist)
 | Understand the system / data flow | [docs/architecture/overview.md](docs/architecture/overview.md) |
 | Touch the client or `/api/gym-data` | [docs/architecture/data-layer.md](docs/architecture/data-layer.md) |
 | Touch FitAgent chat / `/api/chat` / widget | [docs/architecture/chat-agent.md](docs/architecture/chat-agent.md) |
+| Touch auth / `/login` `/signup` `/dashboard` / `proxy.ts` | [docs/architecture/auth.md](docs/architecture/auth.md) |
 | Query or change the DB | [docs/database/schema.md](docs/database/schema.md) |
 | Write/run a migration | [docs/database/migrations.md](docs/database/migrations.md) |
 | Write any `src/` code | [docs/conventions/file-conventions.md](docs/conventions/file-conventions.md) |

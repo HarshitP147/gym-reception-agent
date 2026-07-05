@@ -43,3 +43,6 @@ next-env.d.ts
 
 .agents/
 .claude/
+
+# supabase CLI local cache/link metadata
+/supabase/.temp/

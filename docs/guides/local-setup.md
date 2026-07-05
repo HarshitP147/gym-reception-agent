@@ -13,9 +13,7 @@
    DEEPSEEK_API_KEY=sk-…          # powers FitAgent chat (/api/chat); server-side only
    ```
    (Supabase key: Project Settings → API. DeepSeek key: platform.deepseek.com.)
-3. Run the migrations in the Supabase SQL editor → Run, in order:
-   - `supabase/migrations/0001_init_gym_schema.sql` (schema + seed + read RLS)
-   - `supabase/migrations/0002_bookings_insert_policy.sql` (anon INSERT on `bookings`, needed for chat bookings)
+3. Run the migrations against the linked project: `supabase db push --dry-run --linked` to preview, then `supabase db push --linked`. (First-time setup: `supabase login`, then `supabase link --project-ref nitrtksdydxjmtfavqai`.) See [../database/migrations.md](../database/migrations.md) for the full workflow, including why 0001/0002 needed a `migration repair` step.
 4. `npm run dev`
 
 ## Verify the data layer

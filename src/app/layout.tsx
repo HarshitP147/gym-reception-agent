@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Serif_Display, Outfit } from "next/font/google";
 import "./globals.css";
 import ChatWidget from "@/components/ChatWidget";
+import { cn } from "@/lib/utils";
 
 const dmSerif = DM_Serif_Display({
   weight: "400",
@@ -28,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSerif.variable} ${outfit.variable}`}>
+    <html lang="en" className={cn(dmSerif.variable, outfit.variable)}>
       <body className="min-h-screen antialiased">
         {children}
         <ChatWidget />
